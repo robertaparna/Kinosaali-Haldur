@@ -1,6 +1,3 @@
-import java.sql.Time;
-import java.util.Date;
-
 public class Mängufilm extends Seanss{
     private String žanr;
     private String näitlejad;
