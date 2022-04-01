@@ -2,15 +2,18 @@ public class Mängufilm extends Seanss{
     private String žanr;
     private String näitlejad;
 
-    public Mängufilm(String pealkiri, Date kuupäev, Time algus, Time lõpp, Saal saal, String žanr, String näitlejad) {
-        super(pealkiri, kuupäev, algus, lõpp, saal);
+    public Mängufilm(String pealkiri, Saal saal, String žanr, String näitlejad,
+                     String kuupäev, String algus, int kestus) {
+        super(pealkiri, saal, kestus, algus, kuupäev);
         this.žanr = žanr;
         this.näitlejad = näitlejad;
     }
 
     @Override
     public String toString() {
-        return "Mängufilm{" + "žanr='" + žanr + '\'' + ", näitlejad='" + näitlejad + '\'' + super.toString() +
-                '}';
+        return "Film: " + super.getPealkiri() + '\n' + "Žanr: " +
+                žanr + '\n' + "Peaosas mängivad näitlejad: " + näitlejad + '\n' +
+                "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
+                "Seanss kestab: " + super.getKestus + " minutit." + '\n' + "Saalis: " + super.getSaal();
     }
 }
