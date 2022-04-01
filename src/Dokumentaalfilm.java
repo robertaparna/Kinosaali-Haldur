@@ -16,7 +16,7 @@ public class Dokumentaalfilm extends Seanss{
         return  "Film: " + super.getPealkiri() + '\n' + "Dokumentaali teema on: " +
                 teema + '\n' + "Dokumentaali tegijateks on: " + tegijad + '\n' +
                 "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
-                "Seanss kestab: " + super.getKestus + " minutit." + '\n' + "Saalis: " + super.getSaal();
+                "Seanss kestab: " + super.getKestus() + " minutit." + '\n' + "Saalis: " + super.getSaal();
 
     }
 }

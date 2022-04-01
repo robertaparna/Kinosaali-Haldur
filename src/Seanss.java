@@ -12,7 +12,7 @@ public class Seanss {
     //datetime.plusMinutes(minuteid)
     //datetime string "yyyy-mm-ddThh:mm"
     public Seanss(String pealkiri, String kuupäev, String algus, int kestus, Saal saal) {
-        String a = kuupäev+"T"+ algus; // teeme uhe stringi kus on oiges formaadis kuupaev ja kellaaeg
+        String a = kuupäev+ "T"+ algus; // teeme uhe stringi kus on oiges formaadis kuupaev ja kellaaeg
         DateTime b = DateTime.parse(a); // votame sellest datetime objekti alguseks
         DateTime c = b.plusMinutes(kestus); // lisame algusele kestuse et lopp saada
         Interval vahemik = new Interval(b, c); //teeme nendest vahemiku
@@ -28,6 +28,26 @@ public class Seanss {
         else {
             System.out.println("Selleks ajaks on saal juba broneeritud!");
         }
+    }
+
+    public String getPealkiri() {
+        return pealkiri;
+    }
+
+    public Saal getSaal() {
+        return saal;
+    }
+
+    public String getAlgus() {
+        return algus;
+    }
+
+    public String getKuupäev() {
+        return kuupäev;
+    }
+
+    public int getKestus() {
+        return kestus;
     }
 
     public Interval getVahemik() {

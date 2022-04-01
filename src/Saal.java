@@ -1,9 +1,11 @@
 import org.joda.time.Interval;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Saal {
+
     private List<List<Boolean>> kohaplaan;
     private List<Seanss> broneeringud;
 
@@ -33,9 +35,19 @@ public class Saal {
         }
     }
 
-    //public static list<seanss> get koik broneeringud
+    public List<Seanss> getBroneeringud() {
+        return broneeringud;
+    }
 
-    //public static list<seanss> getBroneerringud(päev)
+    public List<Seanss> getBroneeringud(String kuupaev) {
+        List<Seanss> broneeringudPaeval = new ArrayList<>();
+        for (Seanss seanss : broneeringud) {
+            if(seanss.getKuupäev().equals(kuupaev)) {
+                broneeringudPaeval.add(seanss);
+            }
+        }
+        return broneeringud;
+    }
 
     public boolean aegOnVaba(Interval interval){
         for (Seanss seanss : broneeringud) {
@@ -49,4 +61,5 @@ public class Saal {
     public void lisaBroneering(Seanss seanss) {
         broneeringud.add(seanss);
     }
+
 }

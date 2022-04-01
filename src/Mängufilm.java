@@ -4,9 +4,17 @@ public class Mängufilm extends Seanss{
 
     public Mängufilm(String pealkiri, Saal saal, String žanr, String näitlejad,
                      String kuupäev, String algus, int kestus) {
-        super(pealkiri, saal, kestus, algus, kuupäev);
+        super(pealkiri, kuupäev, algus, kestus, saal);
         this.žanr = žanr;
         this.näitlejad = näitlejad;
+    }
+
+    public String getŽanr() {
+        return žanr;
+    }
+
+    public String getNäitlejad() {
+        return näitlejad;
     }
 
     @Override
@@ -14,6 +22,6 @@ public class Mängufilm extends Seanss{
         return "Film: " + super.getPealkiri() + '\n' + "Žanr: " +
                 žanr + '\n' + "Peaosas mängivad näitlejad: " + näitlejad + '\n' +
                 "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
-                "Seanss kestab: " + super.getKestus + " minutit." + '\n' + "Saalis: " + super.getSaal();
+                "Seanss kestab: " + super.getKestus() + " minutit." + '\n' + "Saalis: " + super.getSaal();
     }
 }
