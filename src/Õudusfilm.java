@@ -2,11 +2,11 @@ public class Õudusfilm extends Mängufilm{
 
     private int vanusepiirang;
 
-    public Õudusfilm(String pealkiri, Date kuupäev, Time algus, Time lõpp, Saal saal, String žanr, String näitlejad, int vanusepiirang) {
-        super(pealkiri, kuupäev, algus, lõpp, saal, žanr, näitlejad);
+    public Õudusfilm(String pealkiri, Saal saal, String žanr, String näitlejad, int vanusepiirang,
+                     String kuupäev, String algus, int kestus) {
+        super(pealkiri, saal, žanr, näitlejad), kuupäev, algus, kestus;
         this.vanusepiirang = vanusepiirang;
     }
-     //vanusepiirang 14.a (k.a)
 
     public boolean kasSaabSeansile(int vanus){
         if (vanus < vanusepiirang){
@@ -22,7 +22,9 @@ public class Õudusfilm extends Mängufilm{
 
     @Override
     public String toString() {
-        return "Õudusfilm{" + super.toString() + "vanusepiirang=" + vanusepiirang +
-                '}';
+        return "Film: " + super.getPealkiri() + '\n' + "Žanr: " +
+                žanr + '\n' + "Peaosas mängivad näitlejad: " + näitlejad + '\n' +
+                "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
+                "Seanss kestab: " + super.getKestus + " minutit." + '\n' + "Saalis: " + super.getSaal();
     }
 }
