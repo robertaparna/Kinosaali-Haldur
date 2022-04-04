@@ -23,6 +23,7 @@ public class Rakendus {
 
             }
             else if (kasutajaSisestus == 3){
+                kinokavaMuutmine(); //vaatamine on puudu
 
             }
             else if (kasutajaSisestus == 0){
@@ -208,6 +209,12 @@ public class Rakendus {
         if (kasutajaValik.equals("Dokumentaalfilm")){
             dokFilmiLisamine();
         }
+        else if (kasutajaValik.equals("Mängufilm")){
+            mängufilmilisamine();
+        }
+        else if (kasutajaValik.equals("Õudusfilm")){
+            õudusfilmilisamine();
+        }
     }
     public static void dokFilmiLisamine(){
         Scanner in = new Scanner(System.in);
@@ -222,11 +229,64 @@ public class Rakendus {
         int kestus = Integer.parseInt(kasutajaValik);
         //väljasta saalide list koos numbritega nagu kuupäevadega
         System.out.println("Valige üks saal ja sisestage selle saali ees olev number: ");
+        for (int i = 0; i < saalid.size(); i++) {
+            System.out.println(i+1 + ". "  + saalid.get(i));
+        }
+        Saal saal = saalid.get(Integer.parseInt(kasutajaValik)-1);
         System.out.println("Sisestage filmi tegijad: ");
         String tegijad = kasutajaValik;
         System.out.println("Sisestage dokumentaali teema: ");
         String teema = kasutajaValik;
+        new Dokumentaalfilm(pealkiri,kuupäev,algus, kestus, saal, tegijad, teema);
     }
+    public static void mängufilmilisamine(){
+        Scanner in = new Scanner(System.in);
+        String kasutajaValik = in.nextLine();
+        System.out.println("Sisestage mängufilmi pealkiri: ");
+        String pealkiri = kasutajaValik;
+        System.out.println("Valige üks saal ja sisestage selle saali ees olev number: ");
+        for (int i = 0; i < saalid.size(); i++) {
+            System.out.println(i+1 + ". "  + saalid.get(i));
+        }
+        Saal saal = saalid.get(Integer.parseInt(kasutajaValik)-1);
+        System.out.println("Sisestage filmi žanr: ");
+        String žanr = kasutajaValik;
+        System.out.println("Sisestage filmi peaosatäitjad: ");
+        String näitlejad = kasutajaValik;
+        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyy-mm-dd): ");
+        String kuupäev = kasutajaValik;
+        System.out.println("Sisestage seansi algus (kujul hh:mm): ");
+        String algus = kasutajaValik;
+        System.out.println("Sisestage filmi kestus (minutites): ");
+        int kestus = Integer.parseInt(kasutajaValik);
+        new Mängufilm(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
+    }
+    public static void õudusfilmilisamine(){
+        Scanner in = new Scanner(System.in);
+        String kasutajaValik = in.nextLine();
+        System.out.println("Sisestage õudusfilmi pealkiri: ");
+        String pealkiri = kasutajaValik;
+        System.out.println("Valige üks saal ja sisestage selle saali ees olev number: ");
+        for (int i = 0; i < saalid.size(); i++) {
+            System.out.println(i+1 + ". "  + saalid.get(i));
+        }
+        Saal saal = saalid.get(Integer.parseInt(kasutajaValik)-1);
+        System.out.println("Sisestage filmi žanr: ");
+        String žanr = kasutajaValik;
+        System.out.println("Sisestage filmi peaosatäitjad: ");
+        String näitlejad = kasutajaValik;
+        System.out.println("Sisestage vanusepiirang seansile pääsemiseks: ");
+        int vanusepiirang = Integer.parseInt(kasutajaValik);
+        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyy-mm-dd): ");
+        String kuupäev = kasutajaValik;
+        System.out.println("Sisestage seansi algus (kujul hh:mm): ");
+        String algus = kasutajaValik;
+        System.out.println("Sisestage filmi kestus (minutites): ");
+        int kestus = Integer.parseInt(kasutajaValik);
+        new Õudusfilm(pealkiri, saal, žanr, näitlejad, vanusepiirang, kuupäev, algus, kestus);
+    }
+
+
     /**
      * pakub suvalised jarjest vabad kohad vastavalt piletite arvule voi saadab kasutaja edasi ise valima(kui ei leia jarjest)
      * @param seanss valitud seanss
