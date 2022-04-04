@@ -14,6 +14,28 @@ public class Rakendus {
             System.out.println("Sisestage nr 3, kui Te soovite kinokava hallata.");
             System.out.println("Sisestage nr 0, kui Te ei soovi kinopileteid osta.");
             if (kasutajaSisestus == 1){
+                System.out.println("Palun sisestage kuupäeva ees olev number: " +
+                        "Valige endale sobiv kuupäev: ");
+                for (int i = 0; i < getKuupäevad(saalid).size(); i++) {
+                    System.out.println(i+1 + ". "  + getKuupäevad(saalid).get(i));
+                }
+                Scanner in2 = new Scanner(System.in);
+                Integer kasutajaValik = in.nextInt();
+                String kasutajaValitudKuupaev = getKuupäevad(saalid).get(kasutajaValik-1);
+                List<Seanss> toimuvadSeansid = new ArrayList<>(); //kõik kasutaja valitul kuupäeval toimuvad seansid kõikidest saalidest
+                for (int i = 0; i < saalid.size(); i++) { //lisame kõik asjakohased seansid listi
+                    toimuvadSeansid.addAll(saalid.get(i).getBroneeringud(kasutajaValitudKuupaev));
+                }
+                System.out.println("Palun sisestage seansi ees olev number." +
+                        "Valitud kuupäeval toimuvad järgmised seansid: ");
+                for (int i = 0; i < toimuvadSeansid.size(); i++) {
+                    System.out.println(i+1 + ". "  + toimuvadSeansid.get(i));
+                }
+                System.out.println("Sisestage soovitud piletite arv: ");
+
+
+
+
 
 
             }
@@ -37,7 +59,7 @@ public class Rakendus {
         //pileti myymise flow on straight forward, valikud voiksid ikka olla eraldi meetodid
     }
 
-    public List<String> getKuupäevad(List<Saal> saalid) {
+    public static List<String> getKuupäevad(List<Saal> saalid) {
         Set<DateTime> kuupaevad = new HashSet<>();
         for (Saal saal : saalid) {
             for (Seanss seanss : saal.getBroneeringud()) {

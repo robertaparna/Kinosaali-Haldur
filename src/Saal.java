@@ -52,7 +52,6 @@ public class Saal {
         return broneeringud;
     }
 
-    public L
     public boolean aegOnVaba(Interval interval){
         for (Seanss seanss : broneeringud) {
             if(interval.overlaps(seanss.getVahemik())) {
