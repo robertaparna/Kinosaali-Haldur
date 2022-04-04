@@ -1,9 +1,7 @@
 import org.joda.time.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.sql.Date;
+import java.util.*;
 
 public class Rakendus {
     public static void main(String[] args) {
@@ -20,19 +18,29 @@ public class Rakendus {
         //pileti myymise flow on straight forward, valikud voiksid ikka olla eraldi meetodid
     }
 
-    //NB! vaga poolik
-//    public List<String> getKuupäevad() {
-//        Set<String> kuupaevad = new HashSet<>();
-//        for (Seanss seanss : broneeringud) {
-//            kuupaevad.add(seanss.getKuupäev());
-//        }
-//        return new ArrayList<>(kuupaevad);
-//    }
+    public List<String> getKuupäevad(List<Saal> saalid) {
+        Set<DateTime> kuupaevad = new HashSet<>();
+        for (Saal saal : saalid) {
+            for (Seanss seanss : saal.getBroneeringud()) {
+                kuupaevad.add(DateTime.parse(seanss.getKuupäev()));
+            }
+        }
+        List<DateTime> k = new ArrayList<>(kuupaevad);
+        k.sort(null);
+        List<String> u = new ArrayList<>();
+        for (DateTime dateTime : k) {
+            u.add(String.valueOf(dateTime));
+        }
+        return u;
+    }
 
     public static void saalideMuutmine() {
         //lisamine, vaatamine, eemaldamine
     }
     public static void kinokavaMuutmine() {
         //lisamine, vaatamine, eemaldamine
+    }
+    public static void kohtadeValimine(Seanss seanss){
+        //Random
     }
 }

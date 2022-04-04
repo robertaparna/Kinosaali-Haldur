@@ -1,13 +1,18 @@
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
 import org.joda.time.Interval;
 
-public class Seanss {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Seanss implements Comparable<Seanss>{
     private String pealkiri;
     private Saal saal;
     private Interval vahemik;
     private String algus;
     private String kuupäev;
     private int kestus;
+    private List<List<Boolean>> kohaplaan;
     // interval.overlaps(interval)\
     //datetime.plusMinutes(minuteid)
     //datetime string "yyyy-mm-ddThh:mm"
@@ -21,7 +26,7 @@ public class Seanss {
             this.kuupäev = kuupäev;
             this.algus = algus;
             this.kestus = kestus;
-            this.saal = saal;
+            this.kohaplaan = new ArrayList<>(saal.getKohaplaan());
             this.vahemik = vahemik;
             saal.lisaBroneering(this);
         }
@@ -52,5 +57,10 @@ public class Seanss {
 
     public Interval getVahemik() {
         return vahemik;
+    }
+
+    @Override
+    public int compareTo(Seanss o) {
+        return vahemik.getStart().compareTo(o.getVahemik().getStart());
     }
 }
