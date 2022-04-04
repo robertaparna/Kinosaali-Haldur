@@ -13,11 +13,13 @@ public class Rakendus {
             System.out.println("Sisestage nr 2, kui Te soovite saale hallata.");
             System.out.println("Sisestage nr 3, kui Te soovite kinokava hallata.");
             System.out.println("Sisestage nr 0, kui Te ei soovi kinopileteid osta.");
+
             if (kasutajaSisestus == 1){
                 valiKuupaev();
 
             }
             else if (kasutajaSisestus == 2){
+                saalid();
 
             }
             else if (kasutajaSisestus == 3){
@@ -175,7 +177,27 @@ public class Rakendus {
         System.out.println("Saal lisatud!");
         System.out.println("-------------------------------------");
     }
+
+    /**
+     * kasutaja saab saale vaadata
+     */
+    public static void saaliVaatamine(){
+        for (Saal saal : saalid) {
+            System.out.println(saal.saaliInfo());
+        }
+
+    }
+
     public static void kinokavaMuutmine() {
+        System.out.println("Palun sisestage 1, kui te soovite seansse lisada: ");
+        System.out.println("Palun sisestage 2, kui te soovite kinokava vaadata: ");
+        Scanner in = new Scanner(System.in);
+        int kasutajaValik = in.nextInt();
+        if (kasutajaValik == 1){
+            seansiLisamine();
+
+        }
+
         //lisamine, vaatamine, eemaldamine
     }
     public static void seansiLisamine(){

@@ -27,6 +27,7 @@ public class Saal {
     public Saal(String nimi, int read) {
         this.broneeringud = new ArrayList<>();
         this.kohaplaan = new ArrayList<>();
+        this.nimi = nimi;
         for (int i = 0; i < read; i++) {
             int kohad = 0;
             System.out.println("Mitu kohta on " + i+1 + ". reas?");
