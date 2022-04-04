@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Saal {
 
-    private List<List<Boolean>> kohaplaan;
+    private List<List<Integer>> kohaplaan;
     private List<Seanss> broneeringud;
 
-    public List<List<Boolean>> getKohaplaan() {
+    public List<List<Integer>> getKohaplaan() {
         return kohaplaan;
     }
 
@@ -15,9 +15,9 @@ public class Saal {
         this.broneeringud = new ArrayList<>();
         this.kohaplaan = new ArrayList<>();
         for (int i = 0; i < read; i++) {
-            List<Boolean> rida = new ArrayList<>();
+            List<Integer> rida = new ArrayList<>();
             for (int j = 0; j < kohad; j++) {
-                rida.add(false);
+                rida.add(0);
             }
             kohaplaan.add(rida);
         }
@@ -30,9 +30,9 @@ public class Saal {
             int kohad = 0;
             System.out.println("Mitu kohta on " + i+1 + ". reas?");
             Scanner scanner = new Scanner(System.in);
-            List<Boolean> rida = new ArrayList<>();
+            List<Integer> rida = new ArrayList<>();
             for (int j = scanner.nextInt(); j < kohad; j++) {
-                rida.add(false);
+                rida.add(0);
             }
             kohaplaan.add(rida);
         }
@@ -64,5 +64,6 @@ public class Saal {
     public void lisaBroneering(Seanss seanss) {
         broneeringud.add(seanss);
     }
+
 
 }

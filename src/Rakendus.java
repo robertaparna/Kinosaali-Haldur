@@ -81,7 +81,33 @@ public class Rakendus {
     public static void kinokavaMuutmine() {
         //lisamine, vaatamine, eemaldamine
     }
-    public static void kohtadeValimine(Seanss seanss){
-        //Random
+    public static void kohtadeValimine(Seanss seanss, int pileteid) {
+        if(seanss.vabuKohti() < pileteid){
+
+        }
+        Random r = new Random();
+        int rida;
+        boolean mahub = false;
+        for(List<Integer> a : seanss.getKohaplaan()) {
+            if (a.size() >= pileteid) {
+                mahub = true;
+                break;
+            }
+        }
+        if (!mahub){
+            kasutajaValibKohad(pileteid);
+        }
+        else {
+            int i = 0;
+            do {
+                i++;
+                rida = r.nextInt(seanss.getKohaplaan().size());
+            } while (seanss.getKohaplaan().get(rida).size() < pileteid);
+            int koht = r.nextInt(seanss.getKohaplaan().get(rida).size()-pileteid);
+        }
+    }
+
+    public static void kasutajaValibKohad(int pileteid) {
+
     }
 }

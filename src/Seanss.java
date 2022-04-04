@@ -12,7 +12,7 @@ public class Seanss implements Comparable<Seanss>{
     private String algus;
     private String kuupäev;
     private int kestus;
-    private List<List<Boolean>> kohaplaan;
+    private List<List<Integer>> kohaplaan;
     // interval.overlaps(interval)\
     //datetime.plusMinutes(minuteid)
     //datetime string "yyyy-mm-ddThh:mm"
@@ -59,8 +59,40 @@ public class Seanss implements Comparable<Seanss>{
         return vahemik;
     }
 
+    public List<List<Integer>> getKohaplaan() {
+        return kohaplaan;
+    }
+
     @Override
     public int compareTo(Seanss o) {
         return vahemik.getStart().compareTo(o.getVahemik().getStart());
+    }
+
+    public void valjastaKohaplaan() {
+        for (List<Integer> rida : kohaplaan) {
+            for (Integer koht : rida) {
+                if(koht == 1){
+                    System.out.print("\uD83D\uDFE5");
+                }
+                else if(koht == 0){
+                    System.out.print("\uD83D\uDFE9");
+                }
+                else if(koht == 2) {
+                    System.out.print("\uD83D\uDFEA");
+                }
+            }
+        }
+    }
+
+    public int vabuKohti() {
+        int kohti = 0;
+        for (List<Integer> integers : kohaplaan) {
+            for (Integer integer : integers) {
+                if(integer == 0) {
+                    kohti++;
+                }
+            }
+        }
+        return kohti;
     }
 }
