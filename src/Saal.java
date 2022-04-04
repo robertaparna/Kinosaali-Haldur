@@ -1,13 +1,15 @@
 import org.joda.time.Interval;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 public class Saal {
 
     private List<List<Boolean>> kohaplaan;
     private List<Seanss> broneeringud;
+
+    public List<List<Boolean>> getKohaplaan() {
+        return kohaplaan;
+    }
 
     public Saal(int read, int kohad) {
         this.broneeringud = new ArrayList<>();
@@ -26,9 +28,10 @@ public class Saal {
         this.kohaplaan = new ArrayList<>();
         for (int i = 0; i < read; i++) {
             int kohad = 0;
-            //kusib: mitu kohta i+1 reas ja paneb selle kohad vaartuseks
+            System.out.println("Mitu kohta on " + i+1 + ". reas?");
+            Scanner scanner = new Scanner(System.in);
             List<Boolean> rida = new ArrayList<>();
-            for (int j = 0; j < kohad; j++) {
+            for (int j = scanner.nextInt(); j < kohad; j++) {
                 rida.add(false);
             }
             kohaplaan.add(rida);
@@ -49,6 +52,7 @@ public class Saal {
         return broneeringud;
     }
 
+    public L
     public boolean aegOnVaba(Interval interval){
         for (Seanss seanss : broneeringud) {
             if(interval.overlaps(seanss.getVahemik())) {
