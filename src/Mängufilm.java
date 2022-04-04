@@ -24,4 +24,6 @@ public class Mängufilm extends Seanss{
                 "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
                 "Seanss kestab: " + super.getKestus() + " minutit." + '\n' + "Saalis: " + super.getSaal();
     }
+
+
 }

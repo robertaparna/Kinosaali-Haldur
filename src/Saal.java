@@ -3,7 +3,7 @@ import org.joda.time.Interval;
 import java.util.*;
 
 public class Saal {
-
+    private String nimi;
     private List<List<Integer>> kohaplaan;
     private List<Seanss> broneeringud;
 
@@ -11,7 +11,8 @@ public class Saal {
         return kohaplaan;
     }
 
-    public Saal(int read, int kohad) {
+    public Saal(String nimi, int read, int kohad) {
+        this.nimi = nimi;
         this.broneeringud = new ArrayList<>();
         this.kohaplaan = new ArrayList<>();
         for (int i = 0; i < read; i++) {
@@ -23,7 +24,7 @@ public class Saal {
         }
     }
 
-    public Saal(int read) {
+    public Saal(String nimi, int read) {
         this.broneeringud = new ArrayList<>();
         this.kohaplaan = new ArrayList<>();
         for (int i = 0; i < read; i++) {
@@ -65,5 +66,23 @@ public class Saal {
         broneeringud.add(seanss);
     }
 
+    public String skeem() {
+        String saal = "";
+        for (List<Integer> rida : kohaplaan) {
+            for (Integer koht : rida) {
+                saal += "\uD83D\uDFE9";
+            }
+            saal += '\n';
+        }
+        return saal;
+    }
 
+    @Override
+    public String toString() {
+        return nimi;
+    }
+
+    public String saaliInfo() {
+        return nimi + '\n' + skeem();
+    }
 }

@@ -7,10 +7,11 @@ public class Õudusfilm extends Mängufilm{
         this.vanusepiirang = vanusepiirang;
     }
 
+    @Override
     public boolean kasSaabSeansile(int vanus){
         if (vanus < vanusepiirang){
             System.out.println("Kahjuks ei ole Te seansile lubatud. " +
-                    "Seansile pääasevad 14-aastased ja vanemad inimesed.");
+                    "Seansile pääasevad " +vanusepiirang +"-aastased ja vanemad inimesed.");
             return false;
         }
         else {

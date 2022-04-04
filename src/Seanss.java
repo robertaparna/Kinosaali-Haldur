@@ -13,6 +13,7 @@ public class Seanss implements Comparable<Seanss>{
     private String kuupäev;
     private int kestus;
     private List<List<Integer>> kohaplaan;
+    private List<List<Integer>> valitudKohad;
     // interval.overlaps(interval)\
     //datetime.plusMinutes(minuteid)
     //datetime string "yyyy-mm-ddThh:mm"
@@ -81,6 +82,7 @@ public class Seanss implements Comparable<Seanss>{
                     System.out.print("\uD83D\uDFEA");
                 }
             }
+            System.out.println();
         }
     }
 
@@ -95,4 +97,31 @@ public class Seanss implements Comparable<Seanss>{
         }
         return kohti;
     }
+
+    public boolean kasSaabSeansile(int vanus){
+        return true;
+    }
+
+    public void valiKoht(int rida, int koht){
+        List<Integer> valitud = new ArrayList<>(){{add(rida); add(koht);}};
+        valitudKohad.add(valitud);
+        kohaplaan.get(rida).set(koht, 2);
+    }
+
+    public void müüValitudKohad() {
+        for (List<Integer> koht : valitudKohad) {
+            kohaplaan.get(koht.get(0)).set(koht.get(1), 1);
+        }
+        valitudKohad.clear();
+    }
+
+    public void tühistaValitudKohad() {
+        for (List<Integer> koht : valitudKohad) {
+            kohaplaan.get(koht.get(0)).set(koht.get(1), 1);
+        }
+        valitudKohad.clear();
+    }
+
+
+
 }
