@@ -11,12 +11,12 @@ public class Rakendus {
         new Mängufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-06", "12:00", 90);
         while(true) {
             Scanner in = new Scanner(System.in);
-            int kasutajaSisestus = in.nextInt();
             System.out.println("Tere tulemast!");
             System.out.println("Sisestage nr 1, kui Te soovite pileteid osta.");
             System.out.println("Sisestage nr 2, kui Te soovite saale hallata.");
             System.out.println("Sisestage nr 3, kui Te soovite kinokava hallata.");
-            System.out.println("Sisestage nr 0, kui Te ei soovi kinopileteid osta.");
+            System.out.println("Sisestage nr 0, kui soovite töö lõpetada.");
+            int kasutajaSisestus = Integer.parseInt(in.nextLine());
 
             if (kasutajaSisestus == 1){
                 valiKuupaev();
@@ -27,16 +27,12 @@ public class Rakendus {
 
             }
             else if (kasutajaSisestus == 3){
-                kinokavaMuutmine(); //vaatamine on puudu
+                kinokavaMuutmine();
 
             }
             else if (kasutajaSisestus == 0){
                 break;
             }
-            //kas soovid piletit myya
-            //kas soovid saale hallata
-            //kas soovid kinokava hallata
-            //kas soovid lopetada -> break
 
         }
     }
@@ -46,13 +42,12 @@ public class Rakendus {
      * valjastab koik kuupaevad millele on broneeritud seansid, laseb kasutajal valida, millise kuupaeva kava vaadata
      **/
     public static void valiKuupaev() {
-        System.out.println("Palun sisestage kuupäeva ees olev number: " +
-                "Valige endale sobiv kuupäev: ");
+        System.out.println("Sisestage sobiva kuupäeva ees olev number: ");
         for (int i = 0; i < getKuupäevad().size(); i++) {
             System.out.println(i+1 + ". "  + getKuupäevad().get(i));
         }
         Scanner in = new Scanner(System.in);
-        int kasutajaValik = in.nextInt();
+        int kasutajaValik = Integer.parseInt(in.nextLine());
         String kasutajaValitudKuupaev = getKuupäevad().get(kasutajaValik-1);
         valiSeanss(kasutajaValitudKuupaev);
     }
@@ -85,7 +80,7 @@ public class Rakendus {
     public static void piletiteValimine(Seanss seanss){
         System.out.println("Palun sisestage soovitud piletide arv: ");
         Scanner in = new Scanner(System.in);
-        int valitudPiletiteArv = in.nextInt();
+        int valitudPiletiteArv = Integer.parseInt(in.nextLine());
         if (seanss instanceof Õudusfilm) {
             valitudPiletiteArv = vanuseKontroll(seanss,valitudPiletiteArv);
         }
@@ -104,7 +99,7 @@ public class Rakendus {
         int lubatudPileteid = 0;
         for (int i = 1; i < piletiteArv; i++) {
             System.out.println("Sisestage palun pileti kasutaja vanus: ");
-            int kasutajaVanus = in.nextInt();
+            int kasutajaVanus = Integer.parseInt(in.nextLine());
             if (seanss.kasSaabSeansile(kasutajaVanus)) {
                 lubatudPileteid++;
             }
@@ -141,7 +136,7 @@ public class Rakendus {
         System.out.println("Sisestage 1, kui te soovite saale vaadata: ");
         System.out.println("Sisestage 2, kui te soovite saale lisada: ");
         Scanner in = new Scanner(System.in);
-        int kasutajaValik = in.nextInt();
+        int kasutajaValik = Integer.parseInt(in.nextLine());
         if (kasutajaValik == 1){
             saaliVaatamine();
         }
@@ -159,15 +154,15 @@ public class Rakendus {
         System.out.println("Sisestage 1, kui teie vastus on 'jah': ");
         System.out.println("Sisestage 0, kui teie vastus on 'ei': ");
         Scanner in = new Scanner(System.in);
-        int kasutajaValik = in.nextInt();
+        int kasutajaValik = Integer.parseInt(in.nextLine());
         if (kasutajaValik == 1){
             System.out.println("Sisestage palun saali nimi: ");
             Scanner in2 = new Scanner(System.in);
             String kasutajaValitudNimi = in2.nextLine();
             System.out.println("Sisestage palun ridade arv: ");
-            int ridadeArv = kasutajaValik;
+            int ridadeArv = Integer.parseInt(in.nextLine());
             System.out.println("Sisestage palun kohtade arv: ");
-            int kohtadeArv = kasutajaValik;
+            int kohtadeArv = Integer.parseInt(in.nextLine());
             saalid.add(new Saal(kasutajaValitudNimi, ridadeArv, kohtadeArv));
         }
         else if (kasutajaValik == 0){
@@ -175,7 +170,7 @@ public class Rakendus {
             Scanner in2 = new Scanner(System.in);
             String kasutajaValitudNimi = in2.nextLine();
             System.out.println("Sisestage palun ridade arv: ");
-            int ridadeArv = kasutajaValik;
+            int ridadeArv = Integer.parseInt(in.nextLine());
             saalid.add(new Saal(kasutajaValitudNimi, ridadeArv));
         }
         System.out.println("Saal lisatud!");
@@ -196,7 +191,7 @@ public class Rakendus {
         System.out.println("Palun sisestage 1, kui te soovite seansse lisada: ");
         System.out.println("Palun sisestage 2, kui te soovite kinokava vaadata: ");
         Scanner in = new Scanner(System.in);
-        int kasutajaValik = in.nextInt();
+        int kasutajaValik = Integer.parseInt(in.nextLine());
         if (kasutajaValik == 1){
             seansiLisamine();
         }
@@ -211,39 +206,40 @@ public class Rakendus {
         }
     }
     public static void seansiLisamine(){
-        System.out.println("Sisestage filmi žanr: ");
+        System.out.println("Sisestage 1 kui soovite lisada dokumentaalfilmi: ");
+        System.out.println("Sisestage 2 kui soovite lisada mängufilmi: ");
+        System.out.println("Sisestage 3 kui soovite lisada õudusfilmi: ");
         Scanner in = new Scanner(System.in);
         String kasutajaValik = in.nextLine();
-        kasutajaValik = kasutajaValik.substring(0, 1).toUpperCase();
-        if (kasutajaValik.equals("Dokumentaalfilm")){
+        if (kasutajaValik.equals("1")){
             dokFilmiLisamine();
         }
-        else if (kasutajaValik.equals("Mängufilm")){
+        else if (kasutajaValik.equals("2")){
             mängufilmilisamine();
         }
-        else if (kasutajaValik.equals("Õudusfilm")){
+        else if (kasutajaValik.equals("3")){
             õudusfilmilisamine();
         }
     }
     public static void dokFilmiLisamine(){
         Scanner in = new Scanner(System.in);
-        String kasutajaValik = in.nextLine();
         System.out.println("Sisestage dokumentaalfilmi pealkiri: ");
-        String pealkiri = kasutajaValik;
-        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyy-mm-dd): ");
-        String kuupäev = kasutajaValik;
+        String pealkiri = in.nextLine();
+        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyyy-mm-dd): ");
+        String kuupäev = in.nextLine();
         System.out.println("Sisestage seansi algus (kujul hh:mm): ");
-        String algus = kasutajaValik;
+        String algus = in.nextLine();
         System.out.println("Sisestage filmi kestus (minutites): ");
-        int kestus = Integer.parseInt(kasutajaValik);
+        int kestus = Integer.parseInt(in.nextLine());
         //väljasta saalide list koos numbritega nagu kuupäevadega
         System.out.println("Valige üks saal ja sisestage selle saali ees olev number: ");
         for (int i = 0; i < saalid.size(); i++) {
             System.out.println(i+1 + ". "  + saalid.get(i));
         }
-        Saal saal = saalid.get(Integer.parseInt(kasutajaValik)-1);
+        int valik = Integer.parseInt(in.nextLine());
+        Saal saal = saalid.get((valik)-1);
         System.out.println("Sisestage filmi tegijad: ");
-        String tegijad = kasutajaValik;
+        String tegijad = in.nextLine();
         System.out.println("Sisestage dokumentaali teema: ");
         String teema = in.nextLine();
         System.out.println("Pealkiri " + pealkiri);
@@ -259,49 +255,48 @@ public class Rakendus {
     }
     public static void mängufilmilisamine(){
         Scanner in = new Scanner(System.in);
-        String kasutajaValik = in.nextLine();
         System.out.println("Sisestage mängufilmi pealkiri: ");
-        String pealkiri = kasutajaValik;
+        String pealkiri = in.nextLine();
         System.out.println("Valige üks saal ja sisestage selle saali ees olev number: ");
         for (int i = 0; i < saalid.size(); i++) {
             System.out.println(i+1 + ". "  + saalid.get(i));
         }
+        String kasutajaValik = in.nextLine();
         Saal saal = saalid.get(Integer.parseInt(kasutajaValik)-1);
         System.out.println("Sisestage filmi žanr: ");
-        String žanr = kasutajaValik;
+        String žanr = in.nextLine();
         System.out.println("Sisestage filmi peaosatäitjad: ");
-        String näitlejad = kasutajaValik;
-        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyy-mm-dd): ");
-        String kuupäev = kasutajaValik;
+        String näitlejad = in.nextLine();
+        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyyy-mm-dd): ");
+        String kuupäev = in.nextLine();
         System.out.println("Sisestage seansi algus (kujul hh:mm): ");
-        String algus = kasutajaValik;
+        String algus = in.nextLine();
         System.out.println("Sisestage filmi kestus (minutites): ");
-        int kestus = Integer.parseInt(kasutajaValik);
+        int kestus = Integer.parseInt(in.nextLine());
         new Mängufilm(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
         System.out.println("-------------------------------------");
     }
     public static void õudusfilmilisamine(){
         Scanner in = new Scanner(System.in);
-        String kasutajaValik = in.nextLine();
         System.out.println("Sisestage õudusfilmi pealkiri: ");
-        String pealkiri = kasutajaValik;
+        String pealkiri = in.nextLine();
         System.out.println("Valige üks saal ja sisestage selle saali ees olev number: ");
         for (int i = 0; i < saalid.size(); i++) {
             System.out.println(i+1 + ". "  + saalid.get(i));
         }
-        Saal saal = saalid.get(Integer.parseInt(kasutajaValik)-1);
+        Saal saal = saalid.get((Integer.parseInt(in.nextLine()))-1);
         System.out.println("Sisestage filmi žanr: ");
-        String žanr = kasutajaValik;
+        String žanr = in.nextLine();
         System.out.println("Sisestage filmi peaosatäitjad: ");
-        String näitlejad = kasutajaValik;
+        String näitlejad = in.nextLine();
         System.out.println("Sisestage vanusepiirang seansile pääsemiseks: ");
-        int vanusepiirang = Integer.parseInt(kasutajaValik);
-        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyy-mm-dd): ");
-        String kuupäev = kasutajaValik;
+        int vanusepiirang = (Integer.parseInt(in.nextLine()));
+        System.out.println("Sisestage seansi toimumise kuupäev (kujul yyyy-mm-dd): ");
+        String kuupäev = in.nextLine();
         System.out.println("Sisestage seansi algus (kujul hh:mm): ");
-        String algus = kasutajaValik;
+        String algus = in.nextLine();
         System.out.println("Sisestage filmi kestus (minutites): ");
-        int kestus = Integer.parseInt(kasutajaValik);
+        int kestus = Integer.parseInt(in.nextLine());
         new Õudusfilm(pealkiri, saal, žanr, näitlejad, vanusepiirang, kuupäev, algus, kestus);
         System.out.println("-------------------------------------");
     }
