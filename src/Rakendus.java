@@ -198,6 +198,9 @@ public class Rakendus {
             seansiLisamine();
 
         }
+        if (kasutajaValik == 2){
+
+        }
 
         //lisamine, vaatamine, eemaldamine
     }
@@ -238,6 +241,8 @@ public class Rakendus {
         System.out.println("Sisestage dokumentaali teema: ");
         String teema = kasutajaValik;
         new Dokumentaalfilm(pealkiri,kuupäev,algus, kestus, saal, tegijad, teema);
+        System.out.println("Seanss lisatud!");
+        System.out.println("-------------------------------------");
     }
     public static void mängufilmilisamine(){
         Scanner in = new Scanner(System.in);
@@ -260,6 +265,8 @@ public class Rakendus {
         System.out.println("Sisestage filmi kestus (minutites): ");
         int kestus = Integer.parseInt(kasutajaValik);
         new Mängufilm(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
+        System.out.println("Seanss lisatud!");
+        System.out.println("-------------------------------------");
     }
     public static void õudusfilmilisamine(){
         Scanner in = new Scanner(System.in);
@@ -284,7 +291,23 @@ public class Rakendus {
         System.out.println("Sisestage filmi kestus (minutites): ");
         int kestus = Integer.parseInt(kasutajaValik);
         new Õudusfilm(pealkiri, saal, žanr, näitlejad, vanusepiirang, kuupäev, algus, kestus);
+        System.out.println("Seanss lisatud!");
+        System.out.println("-------------------------------------");
     }
+    public static void seansiVaatamine(){
+        //System.out.println("Sisestage 1, kui soovite vaadata dokumentaalfilmi(de) kava: ");
+        //System.out.println("Sisestage 2, kui soovite vaadata mängufilmi(de) kava: ");
+        //System.out.println("Sisestage 3, kui soovite vaadata õudusfilmi(de) kava: ");
+        System.out.println("Sisestage 1, kui soovite vaadata kõikide filmide kava: ");
+        Scanner in = new Scanner(System.in);
+        int kasutajaValik = in.nextInt();
+        if (kasutajaValik == 1){
+            for (Saal saal : saalid) {
+                System.out.println(saal.getBroneeringud());
+            }
+        }
+    }
+
 
 
     /**
