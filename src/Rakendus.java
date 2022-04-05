@@ -5,6 +5,10 @@ import java.util.*;
 public class Rakendus {
     static List<Saal> saalid = new ArrayList<>();
     public static void main(String[] args) {
+        saalid.add(new Saal("saal1", 3, 7));
+        new Mängufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-07", "12:00", 90);
+        new Mängufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-05", "12:00", 90);
+        new Mängufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-06", "12:00", 90);
         while(true) {
             Scanner in = new Scanner(System.in);
             int kasutajaSisestus = in.nextInt();
@@ -61,15 +65,14 @@ public class Rakendus {
     public static void valiSeanss(String kuupaev) {
         List<Seanss> toimuvadSeansid = new ArrayList<>(); //kõik kasutaja valitul kuupäeval toimuvad seansid kõikidest saalidest
         Scanner in = new Scanner(System.in);
-        int kasutajaValik = in.nextInt();
         for (int i = 0; i < saalid.size(); i++) { //lisame kõik asjakohased seansid listi
             toimuvadSeansid.addAll(saalid.get(i).getBroneeringud(kuupaev));
         }
-        System.out.println("Palun sisestage seansi ees olev number." +
-                "Valitud kuupäeval toimuvad järgmised seansid: ");
         for (int i = 0; i < toimuvadSeansid.size(); i++) {
             System.out.println(i+1 + ". "  + toimuvadSeansid.get(i));
         }
+        System.out.println("Palun sisestage soovitud seansi ees olev number: ");
+        int kasutajaValik = Integer.parseInt(in.nextLine());
         Seanss kasutajaValitudSeanss = toimuvadSeansid.get(kasutajaValik-1);
         piletiteValimine(kasutajaValitudSeanss); //lisasin
     }
@@ -125,7 +128,7 @@ public class Rakendus {
         k.sort(null);
         List<String> u = new ArrayList<>();
         for (DateTime dateTime : k) {
-            u.add(String.valueOf(dateTime));
+            u.add(String.valueOf(dateTime).substring(0,10));
         }
         return u;
     }
@@ -135,7 +138,7 @@ public class Rakendus {
      * kasutaja valib kas saale vaadata voi lisada
      */
     public static void saalid(){
-        System.out.println("Sisestage 1, kui te soovite saali vaadata: ");
+        System.out.println("Sisestage 1, kui te soovite saale vaadata: ");
         System.out.println("Sisestage 2, kui te soovite saale lisada: ");
         Scanner in = new Scanner(System.in);
         int kasutajaValik = in.nextInt();
@@ -196,13 +199,16 @@ public class Rakendus {
         int kasutajaValik = in.nextInt();
         if (kasutajaValik == 1){
             seansiLisamine();
-
         }
         if (kasutajaValik == 2){
-
+            /*List<Seanss> kava = new ArrayList<>();
+            for (Saal saal : saalid) {
+                kava.addAll(saal.getBroneeringud());
+            }
+            Collections.sort(kava);
+            System.out.println(kava);*/
+            seansiVaatamine();
         }
-
-        //lisamine, vaatamine, eemaldamine
     }
     public static void seansiLisamine(){
         System.out.println("Sisestage filmi žanr: ");
@@ -239,9 +245,16 @@ public class Rakendus {
         System.out.println("Sisestage filmi tegijad: ");
         String tegijad = kasutajaValik;
         System.out.println("Sisestage dokumentaali teema: ");
-        String teema = kasutajaValik;
-        new Dokumentaalfilm(pealkiri,kuupäev,algus, kestus, saal, tegijad, teema);
-        System.out.println("Seanss lisatud!");
+        String teema = in.nextLine();
+        System.out.println("Pealkiri " + pealkiri);
+        System.out.println("Kuupaev " + kuupäev);
+        System.out.println("algus " + algus);
+        System.out.println("Kestus " + kestus);
+        System.out.println("saal " + saal);
+        System.out.println("tegijad " + tegijad);
+        System.out.println("teema " + teema);
+
+        new Dokumentaalfilm(pealkiri, kuupäev, algus, kestus, saal, tegijad, teema);
         System.out.println("-------------------------------------");
     }
     public static void mängufilmilisamine(){
@@ -265,7 +278,6 @@ public class Rakendus {
         System.out.println("Sisestage filmi kestus (minutites): ");
         int kestus = Integer.parseInt(kasutajaValik);
         new Mängufilm(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
-        System.out.println("Seanss lisatud!");
         System.out.println("-------------------------------------");
     }
     public static void õudusfilmilisamine(){
@@ -291,24 +303,18 @@ public class Rakendus {
         System.out.println("Sisestage filmi kestus (minutites): ");
         int kestus = Integer.parseInt(kasutajaValik);
         new Õudusfilm(pealkiri, saal, žanr, näitlejad, vanusepiirang, kuupäev, algus, kestus);
-        System.out.println("Seanss lisatud!");
         System.out.println("-------------------------------------");
     }
     public static void seansiVaatamine(){
-        //System.out.println("Sisestage 1, kui soovite vaadata dokumentaalfilmi(de) kava: ");
-        //System.out.println("Sisestage 2, kui soovite vaadata mängufilmi(de) kava: ");
-        //System.out.println("Sisestage 3, kui soovite vaadata õudusfilmi(de) kava: ");
         System.out.println("Sisestage 1, kui soovite vaadata kõikide filmide kava: ");
         Scanner in = new Scanner(System.in);
-        int kasutajaValik = in.nextInt();
+        int kasutajaValik = Integer.parseInt(in.nextLine());
         if (kasutajaValik == 1){
             for (Saal saal : saalid) {
                 System.out.println(saal.getBroneeringud());
             }
         }
     }
-
-
 
     /**
      * pakub suvalised jarjest vabad kohad vastavalt piletite arvule voi saadab kasutaja edasi ise valima(kui ei leia jarjest)
@@ -322,7 +328,7 @@ public class Rakendus {
             System.out.println("Kui tahad valida uue seansi sisesta 2");
 
             Scanner in = new Scanner(System.in);
-            int valik = in.nextInt();
+            int valik = Integer.parseInt(in.nextLine());
             if(valik == 1) {
                 piletiteValimine(seanss);
             }
@@ -332,28 +338,40 @@ public class Rakendus {
         }
         Random r = new Random();
         int rida;
-        boolean mahub = false;
-        boolean valitud = false;
-        for (int i = 0; i < 20; i++) {
+        boolean t = false;
+        for (int i = 0; i < 20 && !t; i++) {
             rida = r.nextInt(seanss.getKohaplaan().size());
+            seanss.tühistaValitudKohad();
             int jarjest=0;
-            for (int j = 0; j < rida; j++) { //poolik
+            for (int j = 0; j < seanss.getKohaplaan().get(rida).size(); j++) { //poolik
+                if(pileteid >  seanss.getKohaplaan().get(rida).size()) {
+                    break;
+                }
                 if(seanss.getKohaplaan().get(rida).get(j) == 0) {
                     jarjest++;
                     seanss.valiKoht(rida, j);
+                    seanss.valjastaKohaplaan();
+                    System.out.println("-------------------------");
                     if(jarjest == pileteid) {
+                        System.out.println("punane - hoivatud, roheline - vaba, lilla - valitud");
                         seanss.valjastaKohaplaan();
                         System.out.println("Kui valitud kohad sobivad sisesta 1");
                         System.out.println("Kui soovid valida teised kohad sisesta 2");
                         Scanner in = new Scanner(System.in);
-                        int sisend = in.nextInt();
+                        int sisend = Integer.parseInt(in.nextLine());
                         if (sisend == 1) {
                             seanss.müüValitudKohad();
                             System.out.println("Valitud kohad on müüdud!");
                             System.out.println("------------------------------------------");
+                            t = true;
+                            return;
                         }
-                        //else if( )
-
+                        else if( sisend == 2 ) {
+                            t = true;
+                            seanss.tühistaValitudKohad();
+                            kasutajaValibKohad(seanss, pileteid);
+                            return;
+                        }
                     }
                 }
                 else{
@@ -362,9 +380,46 @@ public class Rakendus {
                 }
             }
         }
+        seanss.tühistaValitudKohad();
+        System.out.println("Vali ise kohad!");
+        kasutajaValibKohad(seanss, pileteid);
     }
 
     public static void kasutajaValibKohad(Seanss seanss, int pileteid) {
-
+        System.out.println("punane - hoivatud, roheline - vaba, lilla - valitud");
+        System.out.println("rida 1, koht 1, on vasakul üleval nurgas");
+        seanss.valjastaKohaplaan();
+        Scanner in = new Scanner(System.in);
+        for (int i = 0; i < pileteid; i++) {
+            int koht, rida;
+            while (true){
+                System.out.println("Sisesta rida " + (1 + i) + ". pileti jaoks");
+                rida = Integer.parseInt(in.nextLine())-1;
+                System.out.println("Sisesta koht " + (1 + i) + ". pileti jaoks");
+                koht = Integer.parseInt(in.nextLine())-1;
+                if(!seanss.kohtVaba(rida, koht)) {
+                    System.out.println("See koht on juba hoivatud, vali uuesti");
+                }
+                else{
+                    seanss.valiKoht(rida, koht);
+                    break;
+                }
+            }
+        }
+        System.out.println("Kas valitud kohad sobivad?");
+        System.out.println("punane - hoivatud, roheline - vaba, lilla - valitud");
+        seanss.valjastaKohaplaan();
+        System.out.println("Sisesta 1, kui kohad sobivad");
+        System.out.println("Sisesta 2, kui soovid uuesti valida");
+        int sisend = Integer.parseInt(in.nextLine());
+        if(sisend == 1) {
+            seanss.müüValitudKohad();
+            System.out.println("Valitud kohad on müüdud!");
+            System.out.println("------------------------------------------");
+        }
+        if(sisend == 2) {
+            seanss.tühistaValitudKohad();
+            kasutajaValibKohad(seanss, pileteid);
+        }
     }
 }

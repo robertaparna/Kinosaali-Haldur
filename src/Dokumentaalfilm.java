@@ -4,7 +4,7 @@ import java.util.Date;
 public class Dokumentaalfilm extends Seanss{
 
     public Dokumentaalfilm(String pealkiri, String kuupäev, String algus, int kestus, Saal saal, String tegijad, String teema) {
-        super(pealkiri, algus, kuupäev, kestus, saal);
+        super(pealkiri, kuupäev, algus, kestus, saal);
         this.tegijad = tegijad;
         this.teema = teema;
     }
@@ -16,7 +16,7 @@ public class Dokumentaalfilm extends Seanss{
         return  "Film: " + super.getPealkiri() + '\n' + "Dokumentaali teema on: " +
                 teema + '\n' + "Dokumentaali tegijateks on: " + tegijad + '\n' +
                 "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
-                "Seanss kestab: " + super.getKestus() + " minutit." + '\n' + "Saalis: " + super.getSaal();
+                "Seanss kestab: " + super.getKestus() + " minutit," + '\n' + "Saalis: " + super.getSaal();
 
     }
 }

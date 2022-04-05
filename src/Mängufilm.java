@@ -22,7 +22,7 @@ public class Mängufilm extends Seanss{
         return "Film: " + super.getPealkiri() + '\n' + "Žanr: " +
                 žanr + '\n' + "Peaosas mängivad näitlejad: " + näitlejad + '\n' +
                 "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
-                "Seanss kestab: " + super.getKestus() + " minutit." + '\n' + "Saalis: " + super.getSaal();
+                "Seanss kestab: " + super.getKestus() + " minutit," + '\n' + "Saalis: " + super.getSaal();
     }
 
 

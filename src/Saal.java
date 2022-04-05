@@ -29,11 +29,11 @@ public class Saal {
         this.kohaplaan = new ArrayList<>();
         this.nimi = nimi;
         for (int i = 0; i < read; i++) {
-            int kohad = 0;
-            System.out.println("Mitu kohta on " + i+1 + ". reas?");
-            Scanner scanner = new Scanner(System.in);
+            System.out.println("Mitu kohta on " + (i+1) + ". reas?");
+            Scanner in = new Scanner(System.in);
+            int kohti = Integer.parseInt(in.nextLine());
             List<Integer> rida = new ArrayList<>();
-            for (int j = scanner.nextInt(); j < kohad; j++) {
+            for (int j = 0; j < kohti; j++) {
                 rida.add(0);
             }
             kohaplaan.add(rida);
@@ -51,7 +51,7 @@ public class Saal {
                 broneeringudPaeval.add(seanss);
             }
         }
-        return broneeringud;
+        return broneeringudPaeval;
     }
 
     public boolean aegOnVaba(Interval interval){

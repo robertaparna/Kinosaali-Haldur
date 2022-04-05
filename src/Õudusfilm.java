@@ -25,6 +25,6 @@ public class Õudusfilm extends Mängufilm{
         return "Film: " + super.getPealkiri() + '\n' + "Žanr: " +
                 super.getŽanr() + '\n' + "Peaosas mängivad näitlejad: " + super.getNäitlejad() + '\n' +
                 "Teie seanss toimub: " + super.getKuupäev() + " kell: " + super.getAlgus() + '\n' +
-                "Seanss kestab: " + super.getKestus() + " minutit." + '\n' + "Saalis: " + super.getSaal();
+                "Seanss kestab: " + super.getKestus() + " minutit," + '\n' + "Saalis: " + super.getSaal();
     }
 }

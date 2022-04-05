@@ -29,7 +29,10 @@ public class Seanss implements Comparable<Seanss>{
             this.kestus = kestus;
             this.kohaplaan = new ArrayList<>(saal.getKohaplaan());
             this.vahemik = vahemik;
+            this.saal = saal;
+            this.valitudKohad = new ArrayList<>();
             saal.lisaBroneering(this);
+            System.out.println("Seanss lisatud!");
         }
         else {
             System.out.println("Selleks ajaks on saal juba broneeritud!");
@@ -117,10 +120,15 @@ public class Seanss implements Comparable<Seanss>{
 
     public void tühistaValitudKohad() {
         for (List<Integer> koht : valitudKohad) {
-            kohaplaan.get(koht.get(0)).set(koht.get(1), 1);
+            kohaplaan.get(koht.get(0)).set(koht.get(1), 0);
         }
         valitudKohad.clear();
     }
+
+    public boolean kohtVaba(int rida, int koht) {
+        return kohaplaan.get(rida).get(koht) == 0;
+    }
+
 
 
 
