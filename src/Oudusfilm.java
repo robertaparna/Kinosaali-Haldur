@@ -1,8 +1,8 @@
-public class Õudusfilm extends Mängufilm{
+public class Oudusfilm extends Mangufilm {
 
     private int vanusepiirang;
 
-    public Õudusfilm(String pealkiri, Saal saal, String žanr, String näitlejad, int vanusepiirang, String kuupäev, String algus, int kestus) {
+    public Oudusfilm(String pealkiri, Saal saal, String žanr, String näitlejad, int vanusepiirang, String kuupäev, String algus, int kestus) {
         super(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
         this.vanusepiirang = vanusepiirang;
     }

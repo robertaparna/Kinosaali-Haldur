@@ -6,9 +6,9 @@ public class Rakendus {
     static List<Saal> saalid = new ArrayList<>();
     public static void main(String[] args) {
         saalid.add(new Saal("saal1", 3, 7));
-        new Mängufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-07", "12:00", 90);
-        new Mängufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-05", "12:00", 90);
-        new Mängufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-06", "12:00", 90);
+        new Mangufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-07", "12:00", 90);
+        new Mangufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-05", "12:00", 90);
+        new Mangufilm("nrsg", saalid.get(0),"gfvgh","fvygubh","2022-04-06", "12:00", 90);
         while(true) {
             Scanner in = new Scanner(System.in);
             System.out.println("Tere tulemast!");
@@ -81,7 +81,7 @@ public class Rakendus {
         System.out.println("Palun sisestage soovitud piletide arv: ");
         Scanner in = new Scanner(System.in);
         int valitudPiletiteArv = Integer.parseInt(in.nextLine());
-        if (seanss instanceof Õudusfilm) {
+        if (seanss instanceof Oudusfilm) {
             valitudPiletiteArv = vanuseKontroll(seanss,valitudPiletiteArv);
         }
         kohtadeValimine(seanss, valitudPiletiteArv);
@@ -283,7 +283,7 @@ public class Rakendus {
         String algus = in.nextLine();
         System.out.println("Sisestage filmi kestus (minutites): ");
         int kestus = Integer.parseInt(in.nextLine());
-        new Mängufilm(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
+        new Mangufilm(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
         System.out.println("-------------------------------------");
     }
 
@@ -311,7 +311,7 @@ public class Rakendus {
         String algus = in.nextLine();
         System.out.println("Sisestage filmi kestus (minutites): ");
         int kestus = Integer.parseInt(in.nextLine());
-        new Õudusfilm(pealkiri, saal, žanr, näitlejad, vanusepiirang, kuupäev, algus, kestus);
+        new Oudusfilm(pealkiri, saal, žanr, näitlejad, vanusepiirang, kuupäev, algus, kestus);
         System.out.println("-------------------------------------");
     }
 

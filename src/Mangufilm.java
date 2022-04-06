@@ -1,8 +1,8 @@
-public class Mängufilm extends Seanss{
+public class Mangufilm extends Seanss{
     private String žanr;
     private String näitlejad;
 
-    public Mängufilm(String pealkiri, Saal saal, String žanr, String näitlejad,
+    public Mangufilm(String pealkiri, Saal saal, String žanr, String näitlejad,
                      String kuupäev, String algus, int kestus) {
         super(pealkiri, kuupäev, algus, kestus, saal);
         this.žanr = žanr;
