@@ -11,6 +11,12 @@ public class Saal {
         return kohaplaan;
     }
 
+    /**
+     * konstruktor ristkülikukujulise saali jaoks
+     * @param nimi selle saali nimi
+     * @param read mitu rida selles saalis
+     * @param kohad mitu kohta igas reas
+     */
     public Saal(String nimi, int read, int kohad) {
         this.nimi = nimi;
         this.broneeringud = new ArrayList<>();
@@ -24,6 +30,11 @@ public class Saal {
         }
     }
 
+    /**
+     * konstruktor saali jaoks kus igas reas ei ole sama palju kohti
+     * @param nimi saali nimi
+     * @param read mitu rida selles saalis
+     */
     public Saal(String nimi, int read) {
         this.broneeringud = new ArrayList<>();
         this.kohaplaan = new ArrayList<>();
@@ -40,10 +51,17 @@ public class Saal {
         }
     }
 
+    /**
+     * @return kõik broneeringud
+     */
     public List<Seanss> getBroneeringud() {
         return broneeringud;
     }
 
+    /**
+     * @param kuupaev kuupäev
+     * @return koik broneeringud sellel kuupäeval
+     */
     public List<Seanss> getBroneeringud(String kuupaev) {
         List<Seanss> broneeringudPaeval = new ArrayList<>();
         for (Seanss seanss : broneeringud) {
@@ -54,6 +72,11 @@ public class Saal {
         return broneeringudPaeval;
     }
 
+    /**
+     * kas soovitud aeg on juba broneeritud
+     * @param interval millist aega broneerida tahame
+     * @return kas see aeg on saadaval või ei
+     */
     public boolean aegOnVaba(Interval interval){
         for (Seanss seanss : broneeringud) {
             if(interval.overlaps(seanss.getVahemik())) {
@@ -63,10 +86,18 @@ public class Saal {
         return true;
     }
 
+    /**
+     * seansi lisamine saali broneeringute hulka
+     * @param seanss mida lisame
+     */
     public void lisaBroneering(Seanss seanss) {
         broneeringud.add(seanss);
     }
 
+    /**
+     * saali plaani koostamine
+     * @return saali plaan
+     */
     public String skeem() {
         String saal = "";
         for (List<Integer> rida : kohaplaan) {

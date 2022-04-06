@@ -97,7 +97,7 @@ public class Rakendus {
     public static int vanuseKontroll(Seanss seanss, int piletiteArv) {
         Scanner in = new Scanner(System.in);
         int lubatudPileteid = 0;
-        for (int i = 1; i < piletiteArv; i++) {
+        for (int i = 0; i < piletiteArv; i++) {
             System.out.println("Sisestage palun pileti kasutaja vanus: ");
             int kasutajaVanus = Integer.parseInt(in.nextLine());
             if (seanss.kasSaabSeansile(kasutajaVanus)) {
@@ -187,6 +187,10 @@ public class Rakendus {
 
     }
 
+    /**
+     * kasutaja saab kinokava hallata
+     */
+
     public static void kinokavaMuutmine() {
         System.out.println("Palun sisestage 1, kui te soovite seansse lisada: ");
         System.out.println("Palun sisestage 2, kui te soovite kinokava vaadata: ");
@@ -196,15 +200,13 @@ public class Rakendus {
             seansiLisamine();
         }
         if (kasutajaValik == 2){
-            /*List<Seanss> kava = new ArrayList<>();
-            for (Saal saal : saalid) {
-                kava.addAll(saal.getBroneeringud());
-            }
-            Collections.sort(kava);
-            System.out.println(kava);*/
             seansiVaatamine();
         }
     }
+
+    /**
+     * kasutaja saab seansi lisada
+     */
     public static void seansiLisamine(){
         System.out.println("Sisestage 1 kui soovite lisada dokumentaalfilmi: ");
         System.out.println("Sisestage 2 kui soovite lisada mängufilmi: ");
@@ -221,6 +223,10 @@ public class Rakendus {
             õudusfilmilisamine();
         }
     }
+
+    /**
+     * kasutaja saab lisada dokumentaalfilmi
+     */
     public static void dokFilmiLisamine(){
         Scanner in = new Scanner(System.in);
         System.out.println("Sisestage dokumentaalfilmi pealkiri: ");
@@ -253,6 +259,10 @@ public class Rakendus {
         new Dokumentaalfilm(pealkiri, kuupäev, algus, kestus, saal, tegijad, teema);
         System.out.println("-------------------------------------");
     }
+
+    /**
+     * kasutaja saab lisada mängufilmi
+     */
     public static void mängufilmilisamine(){
         Scanner in = new Scanner(System.in);
         System.out.println("Sisestage mängufilmi pealkiri: ");
@@ -276,6 +286,10 @@ public class Rakendus {
         new Mängufilm(pealkiri, saal, žanr, näitlejad, kuupäev, algus, kestus);
         System.out.println("-------------------------------------");
     }
+
+    /**
+     * kasutaja saab lisada õudusfilmi
+     */
     public static void õudusfilmilisamine(){
         Scanner in = new Scanner(System.in);
         System.out.println("Sisestage õudusfilmi pealkiri: ");
@@ -300,6 +314,10 @@ public class Rakendus {
         new Õudusfilm(pealkiri, saal, žanr, näitlejad, vanusepiirang, kuupäev, algus, kestus);
         System.out.println("-------------------------------------");
     }
+
+    /**
+     * väljastab terve kinokava
+     */
     public static void seansiVaatamine(){
         System.out.println("Sisestage 1, kui soovite vaadata kõikide filmide kava: ");
         Scanner in = new Scanner(System.in);
@@ -312,14 +330,15 @@ public class Rakendus {
     }
 
     /**
+     * PILET STEP 5
      * pakub suvalised jarjest vabad kohad vastavalt piletite arvule voi saadab kasutaja edasi ise valima(kui ei leia jarjest)
      * @param seanss valitud seanss
      * @param pileteid pakutavate piletite arv
      */
     public static void kohtadeValimine(Seanss seanss, int pileteid) {
-        if(seanss.vabuKohti() < pileteid){
-            System.out.println("Kahjuks sellel seansil ei ole piisavalt kohti!");
-            System.out.println("Kui tahad valida uue piletite arvu sisesta 1");
+        if(seanss.vabuKohti() < pileteid){                                          //koigepealt kontrollib kas nii palju
+            System.out.println("Kahjuks sellel seansil ei ole piisavalt kohti!");   //vabu kohti on ja kui pole annab
+            System.out.println("Kui tahad valida uue piletite arvu sisesta 1");     //edasi võimalused
             System.out.println("Kui tahad valida uue seansi sisesta 2");
 
             Scanner in = new Scanner(System.in);
@@ -331,23 +350,22 @@ public class Rakendus {
                 valiKuupaev();
             }
         }
-        Random r = new Random();
+        Random r = new Random();    //kui piisavalt kohti on siis ta hakkab otsima suvalist rida kuhu saaks nii palju
+                                    //kohti järjest panna
         int rida;
         boolean t = false;
-        for (int i = 0; i < 20 && !t; i++) {
-            rida = r.nextInt(seanss.getKohaplaan().size());
-            seanss.tühistaValitudKohad();
+        for (int i = 0; i < 20 && !t; i++) {  //kuna ma ei võta järjest vaid valin suvalisi ridu ei saa ta kuidagi aru kas tal on juba
+            rida = r.nextInt(seanss.getKohaplaan().size()); //voibolla koik read läbi vaadatud ja ükski ei sobi või kui ta oma juhuslike
+            seanss.tühistaValitudKohad();                   //ridadega ei saagi äkki kõiki ridu vaadatud, niiet ta proovib 20 korda ja siis annab alla
             int jarjest=0;
-            for (int j = 0; j < seanss.getKohaplaan().get(rida).size(); j++) { //poolik
-                if(pileteid >  seanss.getKohaplaan().get(rida).size()) {
+            for (int j = 0; j < seanss.getKohaplaan().get(rida).size(); j++) { //käib valitud rea läbi ja vaatab kas seal on nii palju järjest
+                if(pileteid >  seanss.getKohaplaan().get(rida).size()) {  //kui rida on lühem lõpetab kohe
                     break;
                 }
-                if(seanss.getKohaplaan().get(rida).get(j) == 0) {
+                if(seanss.getKohaplaan().get(rida).get(j) == 0) {  //kui koht on vaba siis valib selle
                     jarjest++;
                     seanss.valiKoht(rida, j);
-                    seanss.valjastaKohaplaan();
-                    System.out.println("-------------------------");
-                    if(jarjest == pileteid) {
+                    if(jarjest == pileteid) {                      //kui on järjest valinud piisavalt kohti siis pakub need välja
                         System.out.println("punane - hoivatud, roheline - vaba, lilla - valitud");
                         seanss.valjastaKohaplaan();
                         System.out.println("Kui valitud kohad sobivad sisesta 1");
@@ -369,7 +387,7 @@ public class Rakendus {
                         }
                     }
                 }
-                else{
+                else{ //kui koht ei ole vaba siis hakkab järgmisest uuesti valima
                     jarjest = 0;
                     seanss.tühistaValitudKohad();
                 }
@@ -380,14 +398,20 @@ public class Rakendus {
         kasutajaValibKohad(seanss, pileteid);
     }
 
+    /**
+     * PILET STEP 6
+     * kasutaja valib ise piletite jaoks kohad
+     * @param seanss millisele seansile pileteid müüakse
+     * @param pileteid mitu piletit
+     */
     public static void kasutajaValibKohad(Seanss seanss, int pileteid) {
         System.out.println("punane - hoivatud, roheline - vaba, lilla - valitud");
         System.out.println("rida 1, koht 1, on vasakul üleval nurgas");
         seanss.valjastaKohaplaan();
         Scanner in = new Scanner(System.in);
-        for (int i = 0; i < pileteid; i++) {
+        for (int i = 0; i < pileteid; i++) { //iga pileti jaoks küsib rida ja kohta
             int koht, rida;
-            while (true){
+            while (true){ //kui koht ei ole vaba küsib uuesti
                 System.out.println("Sisesta rida " + (1 + i) + ". pileti jaoks");
                 rida = Integer.parseInt(in.nextLine())-1;
                 System.out.println("Sisesta koht " + (1 + i) + ". pileti jaoks");

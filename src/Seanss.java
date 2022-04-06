@@ -67,11 +67,14 @@ public class Seanss implements Comparable<Seanss>{
         return kohaplaan;
     }
 
-    @Override
+    @Override //et seansse võrreldaks algusaja järgi
     public int compareTo(Seanss o) {
         return vahemik.getStart().compareTo(o.getVahemik().getStart());
     }
 
+    /**
+     * seansi kohaplaani hetkeseisu väljastamine
+     */
     public void valjastaKohaplaan() {
         for (List<Integer> rida : kohaplaan) {
             for (Integer koht : rida) {
@@ -89,6 +92,9 @@ public class Seanss implements Comparable<Seanss>{
         }
     }
 
+    /**
+     * @return mitu vaba kohta hetkel seansil
+     */
     public int vabuKohti() {
         int kohti = 0;
         for (List<Integer> integers : kohaplaan) {
@@ -105,12 +111,20 @@ public class Seanss implements Comparable<Seanss>{
         return true;
     }
 
+    /**
+     * märgib koha kohaplaanis valituks ja jätab meelde
+     * @param rida rida
+     * @param koht koht
+     */
     public void valiKoht(int rida, int koht){
         List<Integer> valitud = new ArrayList<>(){{add(rida); add(koht);}};
         valitudKohad.add(valitud);
         kohaplaan.get(rida).set(koht, 2);
     }
 
+    /**
+     * märgib valitud kohad hõivatuks ja tühjendab mälu
+     */
     public void müüValitudKohad() {
         for (List<Integer> koht : valitudKohad) {
             kohaplaan.get(koht.get(0)).set(koht.get(1), 1);
@@ -118,6 +132,9 @@ public class Seanss implements Comparable<Seanss>{
         valitudKohad.clear();
     }
 
+    /**
+     * märgib valitud kohad vabaks ja tühjendab mälu
+     */
     public void tühistaValitudKohad() {
         for (List<Integer> koht : valitudKohad) {
             kohaplaan.get(koht.get(0)).set(koht.get(1), 0);
@@ -125,6 +142,12 @@ public class Seanss implements Comparable<Seanss>{
         valitudKohad.clear();
     }
 
+    /**
+     * kas koht on vaba
+     * @param rida rida
+     * @param koht koht
+     * @return kas see koht on vaba
+     */
     public boolean kohtVaba(int rida, int koht) {
         return kohaplaan.get(rida).get(koht) == 0;
     }
