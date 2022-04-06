@@ -118,7 +118,7 @@ public class Rakendus {
             for (Seanss seanss : saal.getBroneeringud()) {
                 kuupaevad.add(DateTime.parse(seanss.getKuupäev()));
             }
-        }
+        } //panen kõik hulka, sorteerin selle ära, ja siis võtan sealt kuupäevad stringidena
         List<DateTime> k = new ArrayList<>(kuupaevad);
         k.sort(null);
         List<String> u = new ArrayList<>();
